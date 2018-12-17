@@ -1,0 +1,19 @@
+{
+    "name": "iredcap/pay-php",
+    "description": "Payment SDK",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brian Waring",
+            "email": "Brianwaring98@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "IredCap\\Pay\\": "src"
+        }
+    }
+}

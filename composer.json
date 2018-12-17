@@ -1,0 +1,14 @@
+{
+    "name": "iredcap/test-php",
+    "description": "the new php test",
+    "type": "project",
+    "keywords": [
+        "framework"
+    ],
+    "license": "Apache-2.0",
+    "require": {
+        "php": ">=7.0.0",
+        "filp/whoops": "^2.3",
+        "iredcap/pay-php": "^0.0.1"
+    }
+}

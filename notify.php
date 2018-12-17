@@ -1,0 +1,1 @@
+<?phprequire_once "pay.php";use IredCap\Pay\Util\LogUtil;//返回确认$return['result_code'] = 'OK';$return['result_msg'] = 'FAIL';try{    $pay = new Payment($config);    if ($pay->callback()){        $return['result_msg'] = 'SUCCESS';    }}catch (\Exception $e){    LogUtil::DEBUG($e->getMessage());}exit(json_encode($return));
