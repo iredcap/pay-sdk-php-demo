@@ -184,6 +184,7 @@ class HttpUtil
             $response->setHttpStatusCode(curl_getinfo($curl, CURLINFO_HTTP_CODE));
             $response->setContentType(curl_getinfo($curl, CURLINFO_CONTENT_TYPE));
             $response->setHeaderSize(curl_getinfo($curl, CURLINFO_HEADER_SIZE));
+            
             LogUtil::INFO('Response Body :'. $response->getBody());
             //验签需要返回数据与返回sign比对校验
             if ($response->getHttpStatusCode() < 400){

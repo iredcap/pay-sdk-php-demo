@@ -35,7 +35,7 @@ class Payment
     public function __construct(array $config)
     {
         //1.设置配置参数
-        HttpRequest::setBaseUrl('http://api.caomao.com/');         // 设置 API请求根 https://api.pay.iredcap.cn/  http://api.caomao.com/
+        HttpRequest::setBaseUrl('http://www.caomao.com/');         // 设置 API请求根 https://api.pay.iredcap.cn/  http://api.caomao.com/
         HttpRequest::setMchId($config['mch_id']);         // 设置 MCH ID
         HttpRequest::setSecretKey($config['mch_key']);  // 设置 MCH KEY
         HttpRequest::setNotifyUrl($config['notify_url']); // 设置 NOTIFY URL
@@ -62,11 +62,9 @@ class Payment
             "subject" => $param['body'],
             "body" => $param['body'],
             "amount" => $param['sum'],
-            "currency" =>'USD',
+            "currency" =>'CNY',
             "channel" => strtolower($param['channel']), //支付方式小写
-            "extparam" => [
-                "nocestr" => $this->getRandChar()
-            ], //支付附加参数
+            "extparam" => $param['extra']//支付附加参数
 
         ];
         //提交支付

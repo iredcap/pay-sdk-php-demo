@@ -18,8 +18,6 @@ class LogUtil
 {
     private $level = 15;
 
-    private $file = "./pay.log";
-
     private static $instance = null;
 
     private function __construct(){}
@@ -54,16 +52,16 @@ class LogUtil
     public static function ERROR($msg,$level = 15)
     {
         $debugInfo = debug_backtrace();
-        $stack = "[";
+        $stack = "\n[";
         foreach($debugInfo as $key => $val){
             if(array_key_exists("file", $val)){
-                $stack .= ",file:" . $val["file"];
+                $stack .= "File:" . $val["file"] .',';
             }
             if(array_key_exists("line", $val)){
-                $stack .= ",line:" . $val["line"];
+                $stack .= "In line:" . $val["line"].',';
             }
             if(array_key_exists("function", $val)){
-                $stack .= ",function:" . $val["function"];
+                $stack .= "At function:" . $val["function"];
             }
         }
         $stack .= "]";
@@ -80,16 +78,16 @@ class LogUtil
         switch ($level)
         {
             case 1:
-                return 'debug';
+                return 'DEBUG';
                 break;
             case 2:
-                return 'info';
+                return 'INFO';
                 break;
             case 4:
-                return 'warn';
+                return 'WARN';
                 break;
             case 8:
-                return 'error';
+                return 'ERROR';
                 break;
             default:
 
@@ -104,8 +102,13 @@ class LogUtil
         }
         if(($level & $this->level) == $level )
         {
-            $msg = '['.date('Y-m-d H:i:s').']['.$this->getLevelStr($level).'] '.$message ."\n\n";
-            $fileObj = fopen($this->file,'a');
+            $msg = "---------------------------------------------------------------\n";
+            $msg .= '['.date('Y-m-d H:i:s').']['.$this->getLevelStr($level).'] '. $message ."\n";
+            //创建文件夹
+            $file_path = date('Ym');
+            !file_exists($file_path) && @mkdir($file_path, 0777, true);
+            $fileObj = fopen($file_path . DIRECTORY_SEPARATOR
+                . date('d') . '_' . $this->getLevelStr($level) . '.log' ,'a');
             fwrite($fileObj, $msg, 4096);
         }
     }
